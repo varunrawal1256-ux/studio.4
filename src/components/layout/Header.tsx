@@ -10,8 +10,6 @@ const Header = () => {
       ? "Player Dashboard"
       : pathname === "/compare"
       ? "AI Player Comparison"
-      : pathname === "/scorer"
-      ? "Match Scorer"
       : "Cricket Stats Hub";
 
   return (
