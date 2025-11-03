@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "player1",
+      "description": "Placeholder image for a cricket player",
+      "imageUrl": "https://images.unsplash.com/photo-1600088113705-bbc49796ae3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGxheWVyJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzYyMTQ3NTQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "player portrait"
+    },
+    {
+      "id": "player2",
+      "description": "Placeholder image for a cricket player",
+      "imageUrl": "https://images.unsplash.com/photo-1600088069809-fb6f706701f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwbGF5ZXIlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjIxNDc1NDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "player portrait"
+    },
+    {
+      "id": "player3",
+      "description": "Placeholder image for a cricket player",
+      "imageUrl": "https://images.unsplash.com/photo-1572122250231-6532b3a3df61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwbGF5ZXIlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjIxNDc1NDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "player portrait"
+    },
+    {
+      "id": "player4",
+      "description": "Placeholder image for a cricket player",
+      "imageUrl": "https://images.unsplash.com/photo-1600088113705-bbc49796ae3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGxheWVyJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzYyMTQ3NTQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "player portrait"
+    },
+    {
+      "id": "player5",
+      "description": "Placeholder image for a cricket player",
+      "imageUrl": "https://images.unsplash.com/photo-1600088069809-fb6f706701f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwbGF5ZXIlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjIxNDc1NDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "player portrait"
+    },
+    {
+      "id": "player6",
+      "description": "Placeholder image for a cricket player",
+      "imageUrl": "https://images.unsplash.com/photo-1701205546315-249af86799dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwbGF5ZXIlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjIxNDc1NDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "player portrait"
+    },
+    {
+      "id": "player7",
+      "description": "Placeholder image for a cricket player",
+      "imageUrl": "https://images.unsplash.com/photo-1600088113705-bbc49796ae3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGxheWVyJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzYyMTQ3NTQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "player portrait"
+    }
+  ]
 }
