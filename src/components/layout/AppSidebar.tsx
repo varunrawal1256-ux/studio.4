@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart2, Scale, Trophy } from "lucide-react";
+import { BarChart2, Scale, Trophy, FilePenLine } from "lucide-react";
 import {
   Sidebar,
   SidebarHeader,
@@ -28,6 +28,11 @@ const AppSidebar = () => {
       href: "/compare",
       label: "Compare Players",
       icon: Scale,
+    },
+    {
+      href: "/scorer",
+      label: "Match Scorer",
+      icon: FilePenLine,
     },
   ];
 
