@@ -49,19 +49,19 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold tracking-tight">Player Rankings</h2>
-        <Button onClick={() => setIsAddPlayerSheetOpen(true)}>
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <h2 className="text-2xl font-bold tracking-tight self-start sm:self-center">Player Rankings</h2>
+        <Button onClick={() => setIsAddPlayerSheetOpen(true)} className="w-full sm:w-auto">
           <PlusCircle />
           Add Player
         </Button>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+      <div className="grid gap-8 md:grid-cols-3">
+        <div className="md:col-span-2">
           <PlayerRankingsTable players={calculatedPlayers} />
         </div>
-        <div className="lg:col-span-1">
+        <div className="md:col-span-1">
           <PerformanceChart players={topPlayers} />
         </div>
       </div>

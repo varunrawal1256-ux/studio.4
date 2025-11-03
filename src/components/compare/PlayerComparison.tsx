@@ -141,7 +141,7 @@ const PlayerComparison = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={isLoading}>
+              <Button type="submit" disabled={isLoading} className="w-full sm:w-auto">
                 {isLoading ? "Analyzing..." : "Compare Players"}
                 <Sparkles className="ml-2 h-4 w-4" />
               </Button>
