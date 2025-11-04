@@ -83,6 +83,17 @@ const MatchScorer = () => {
       alert(`Match over! ${winner} wins.`);
     }
   };
+  
+  const _undoBall = () => {
+    if (balls === 0) {
+      if (overs > 0) {
+        setOvers(overs - 1);
+        setBalls(5);
+      }
+    } else {
+      setBalls(balls - 1);
+    }
+  };
 
   const handleUndo = () => {
     if (history.length === 0) return;
@@ -93,26 +104,15 @@ const MatchScorer = () => {
 
     if (typeof lastEvent === "number") {
       setScore(score - lastEvent);
-      undoBall();
+      _undoBall();
     } else if (lastEvent === "W") {
       setWickets(wickets - 1);
-      undoBall();
+      _undoBall();
     } else if (lastEvent === "Wd" || lastEvent === "Nb") {
       setScore(score - 1);
     }
 
     if (gameOver) setGameOver(false);
-  };
-
-_undoBall = () => {
-    if (balls === 0) {
-      if (overs > 0) {
-        setOvers(overs - 1);
-        setBalls(5);
-      }
-    } else {
-      setBalls(balls - 1);
-    }
   };
 
   const handleReset = () => {
