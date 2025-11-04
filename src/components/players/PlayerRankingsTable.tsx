@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Image from "next/image";
-import { ArrowUpDown, Trophy } from "lucide-react";
+import { ArrowUpDown, Trophy, Pencil } from "lucide-react";
 import {
   Table,
   TableHeader,
@@ -18,7 +18,12 @@ import { cn } from "@/lib/utils";
 
 type SortKey = "rank" | "score" | "runs" | "wickets" | "matches";
 
-const PlayerRankingsTable = ({ players }: { players: CalculatedPlayer[] }) => {
+interface PlayerRankingsTableProps {
+  players: CalculatedPlayer[];
+  onEditPlayer: (player: CalculatedPlayer) => void;
+}
+
+const PlayerRankingsTable = ({ players, onEditPlayer }: PlayerRankingsTableProps) => {
   const [sortConfig, setSortConfig] = useState<{
     key: SortKey;
     direction: "ascending" | "descending";
@@ -81,6 +86,7 @@ const PlayerRankingsTable = ({ players }: { players: CalculatedPlayer[] }) => {
           <SortableHeader sortKey="wickets">Wickets</SortableHeader>
           <SortableHeader sortKey="matches">Matches</SortableHeader>
           <SortableHeader sortKey="score">Score</SortableHeader>
+          <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -118,6 +124,12 @@ const PlayerRankingsTable = ({ players }: { players: CalculatedPlayer[] }) => {
             <TableCell>{player.matches.toLocaleString()}</TableCell>
             <TableCell className="font-semibold">
               {player.score.toLocaleString()}
+            </TableCell>
+            <TableCell>
+              <Button variant="ghost" size="icon" onClick={() => onEditPlayer(player)}>
+                <Pencil className="h-4 w-4" />
+                <span className="sr-only">Edit Player</span>
+              </Button>
             </TableCell>
           </TableRow>
         ))}
