@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Image from "next/image";
-import { ArrowUpDown, Trophy, Pencil } from "lucide-react";
+import { ArrowUpDown, Trophy, Pencil, Trash2 } from "lucide-react";
 import {
   Table,
   TableHeader,
@@ -21,9 +21,10 @@ type SortKey = "rank" | "score" | "runs" | "wickets" | "matches";
 interface PlayerRankingsTableProps {
   players: CalculatedPlayer[];
   onEditPlayer: (player: CalculatedPlayer) => void;
+  onDeletePlayer: (player: CalculatedPlayer) => void;
 }
 
-const PlayerRankingsTable = ({ players, onEditPlayer }: PlayerRankingsTableProps) => {
+const PlayerRankingsTable = ({ players, onEditPlayer, onDeletePlayer }: PlayerRankingsTableProps) => {
   const [sortConfig, setSortConfig] = useState<{
     key: SortKey;
     direction: "ascending" | "descending";
@@ -126,10 +127,16 @@ const PlayerRankingsTable = ({ players, onEditPlayer }: PlayerRankingsTableProps
               {player.score.toLocaleString()}
             </TableCell>
             <TableCell>
-              <Button variant="ghost" size="icon" onClick={() => onEditPlayer(player)}>
-                <Pencil className="h-4 w-4" />
-                <span className="sr-only">Edit Player</span>
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button variant="ghost" size="icon" onClick={() => onEditPlayer(player)}>
+                  <Pencil className="h-4 w-4" />
+                  <span className="sr-only">Edit Player</span>
+                </Button>
+                <Button variant="ghost" size="icon" onClick={() => onDeletePlayer(player)} className="text-destructive hover:text-destructive">
+                  <Trash2 className="h-4 w-4" />
+                  <span className="sr-only">Delete Player</span>
+                </Button>
+              </div>
             </TableCell>
           </TableRow>
         ))}

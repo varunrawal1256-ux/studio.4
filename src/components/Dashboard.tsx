@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { PlusCircle, Share2 } from 'lucide-react';
+import { PlusCircle, Share2, Trash2 } from 'lucide-react';
 import { initialPlayers } from '@/lib/data';
 import type { Player, CalculatedPlayer } from '@/lib/types';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,16 @@ import PerformanceChart from '@/components/players/PerformanceChart';
 import AddPlayerSheet from '@/components/players/AddPlayerSheet';
 import EditPlayerSheet from '@/components/players/EditPlayerSheet';
 import { useToast } from '@/hooks/use-toast';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 const calculateScore = (player: Player): number => {
   // Weighted formula: 1 point per run, 20 points per wicket
@@ -23,6 +33,7 @@ const Dashboard = () => {
   const [editingPlayer, setEditingPlayer] = useState<CalculatedPlayer | null>(
     null
   );
+  const [playerToDelete, setPlayerToDelete] = useState<CalculatedPlayer | null>(null);
   const { toast } = useToast();
 
   const calculatedPlayers = useMemo((): CalculatedPlayer[] => {
@@ -72,6 +83,19 @@ const Dashboard = () => {
     );
     setIsEditPlayerSheetOpen(false);
     setEditingPlayer(null);
+  };
+
+  const handleDeletePlayer = (player: CalculatedPlayer) => {
+    setPlayerToDelete(player);
+  };
+
+  const confirmDeletePlayer = () => {
+    if (playerToDelete) {
+      setPlayers((prevPlayers) =>
+        prevPlayers.filter((p) => p.id !== playerToDelete.id)
+      );
+      setPlayerToDelete(null);
+    }
   };
 
   const handleShare = async () => {
@@ -141,6 +165,7 @@ const Dashboard = () => {
           <PlayerRankingsTable
             players={calculatedPlayers}
             onEditPlayer={handleEditPlayer}
+            onDeletePlayer={handleDeletePlayer}
           />
         </div>
         <div className="md:col-span-1">
@@ -161,6 +186,24 @@ const Dashboard = () => {
           onPlayerUpdate={handleUpdatePlayer}
         />
       )}
+      <AlertDialog open={!!playerToDelete} onOpenChange={() => setPlayerToDelete(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete{" "}
+              <strong>{playerToDelete?.name}</strong> and remove their data from
+              our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setPlayerToDelete(null)}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmDeletePlayer}>
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
