@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dices, Undo, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 const MatchScorer = () => {
   const [team1Name, setTeam1Name] = useState("Team A");
@@ -23,8 +25,68 @@ const MatchScorer = () => {
   const [history, setHistory] = useState<(string | number)[]>([]);
   const [gameOver, setGameOver] = useState(false);
   const [battingTeam, setBattingTeam] = useState(1);
+  const [autoSave, setAutoSave] = useState(false);
 
   const oversLimit = 20;
+
+  // Load state from local storage on component mount
+  useEffect(() => {
+    try {
+      const savedState = localStorage.getItem("matchScorerState");
+      const savedAutoSave = localStorage.getItem("matchScorerAutoSave");
+      
+      const autoSaveEnabled = savedAutoSave ? JSON.parse(savedAutoSave) : false;
+      setAutoSave(autoSaveEnabled);
+
+      if (autoSaveEnabled && savedState) {
+        const {
+          team1Name,
+          team2Name,
+          score,
+          wickets,
+          balls,
+          overs,
+          history,
+          gameOver,
+          battingTeam,
+        } = JSON.parse(savedState);
+        setTeam1Name(team1Name);
+        setTeam2Name(team2Name);
+        setScore(score);
+        setWickets(wickets);
+        setBalls(balls);
+        setOvers(overs);
+        setHistory(history);
+        setGameOver(gameOver);
+        setBattingTeam(battingTeam);
+      }
+    } catch (error) {
+      console.error("Failed to load state from local storage", error);
+    }
+  }, []);
+
+  // Save state to local storage when it changes and auto-save is on
+  useEffect(() => {
+    localStorage.setItem("matchScorerAutoSave", JSON.stringify(autoSave));
+    if (autoSave) {
+      try {
+        const stateToSave = {
+          team1Name,
+          team2Name,
+          score,
+          wickets,
+          balls,
+          overs,
+          history,
+          gameOver,
+          battingTeam,
+        };
+        localStorage.setItem("matchScorerState", JSON.stringify(stateToSave));
+      } catch (error) {
+        console.error("Failed to save state to local storage", error);
+      }
+    }
+  }, [team1Name, team2Name, score, wickets, balls, overs, history, gameOver, battingTeam, autoSave]);
 
   const handleRun = (run: number) => {
     if (gameOver) return;
@@ -115,7 +177,7 @@ const MatchScorer = () => {
     if (gameOver) setGameOver(false);
   };
 
-  const handleReset = () => {
+  const resetState = () => {
     setScore(0);
     setWickets(0);
     setBalls(0);
@@ -123,6 +185,17 @@ const MatchScorer = () => {
     setHistory([]);
     setGameOver(false);
     setBattingTeam(1);
+    setTeam1Name("Team A");
+    setTeam2Name("Team B");
+  }
+
+  const handleReset = () => {
+    resetState();
+    try {
+      localStorage.removeItem("matchScorerState");
+    } catch (error) {
+      console.error("Failed to clear state from local storage", error);
+    }
   };
 
   return (
@@ -137,6 +210,10 @@ const MatchScorer = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
+          <div className="flex items-center justify-center space-x-2">
+            <Switch id="auto-save" checked={autoSave} onCheckedChange={setAutoSave} />
+            <Label htmlFor="auto-save">Auto-save</Label>
+          </div>
           <div className="grid grid-cols-2 gap-4">
             <Input
               value={team1Name}
